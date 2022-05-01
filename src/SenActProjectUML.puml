@@ -1,0 +1,134 @@
+@startuml
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/Drakemor/RedDress-PlantUML/master//style.puml
+
+
+FilteredStream --* MainWindow : Composition
+Network -- MainWindow
+MainWindow -- Canvas
+MainWindow -- SimulationToolBar
+MainWindow -- StationInfoPanel
+MainWindow -- EditToolBar
+MainWindow -- Simulator
+
+
+class MainWindow extends JFrame {
+    - network: Network
+    - simulator: Simulator
+    - logText: JTextArea
+
+    +initInfoPanels()
+    +main(String[] args)
+
+}
+
+class FilteredStream{
+    +FilteredStream(OutPutStream)
+    +write(Byte[])
+    +write(Integer)
+    +write(Byte[], int, int)
+}
+
+
+class Canvas{
+    -nodes: ArrayList<NodeItem>
+    -links: ArrayList<LinkItem>
+    -net: Network
+    -infoPanel: StationInfoPanel
+    -toolSelected: String
+    -firstNode: NodeItem
+    -currentLink: LinkItem
+    -nodeDrag: boolean
+    -editable: boolean
+    -currentDistance: int
+    --
+    +Canvas()
+    +Network(Network, StationInfoPanel)
+    +setEditable(boolean)
+    +actionperformed(ActionEvent)
+    +mousePressed(MouseEvent)
+    +mouseDragged(MouseEvent)
+    +mouseMoved(MouseEvent)
+    +mouseReleased(MouseEvent)
+    +mouseExited(MouseEvent)
+    +getNode(Point)
+    +getLink(Point)
+    +paintComponents(Graphics)
+    +setCurrentDistance(int)
+}
+
+class Network{
+    -nodes: ArrayList<Node>
+    -modified: boolean
+    --
+    +Network()
+    +isModified()
+    +setModified(boolean)
+    +addNode(Node)
+    +getBaseStation()
+    +getNodes()
+    +getNodeFromID(int)
+    +addLink(Node,Node,int)
+    +removeLink(Node,Node)
+    +modifyLink(Node,Node,int)
+}
+
+class Simulator{
+    -net: Network
+    -date: GregorianCalendar
+    -timer: Timer
+    --
+    +Simulator(Network, int)
+    +Simulator(Network)
+    +setDelay(int)
+    +next()
+    +run()
+    +stop()
+    +incrementTime()
+    +initialize()
+}
+
+class SimulationToolBar extends JToolBar implements ActionListener{
+    +{static}PLAY: String
+    +{static}STOP: String
+    +{static}SPEED: String
+    -simulator: Simulator
+    -simSpeed: JTextField
+    -canvas: Canvas
+    --
+    +SimulationToolBar(Simulator,Canvas)
+    -initComponents()
+    -makeEditButton(String,String,String,String)
+    +actionPerformed(ActionEvent)
+}
+
+class EditToolBar extends JToolBar{
+    +{static} ADD_STATION: String
+    +{static} ADD_LINK: String
+    +{static} DELETE: String
+    --
+    +EditToolBar(Canvas)
+    -addButtons(Canvas)
+    -makeEditButton(String,String,String,String,Canvas)
+}
+
+class StationInfoPanel extends JPanel implements ActionListener{
+    -station: Station
+    -sensorList: JList
+    -connectionList: JList
+    -sensorModel: DefaultListModel
+    -title: JLabel
+    -state: JLabel
+    --
+    +StationInfoPanel()
+    +updateComponents()
+    -initComponents()
+    +actionPerformed(ActionEvent)
+    -updateSensorModel()
+    +setStation(Station)
+    +getStation()
+}
+
+
+
+@enduml

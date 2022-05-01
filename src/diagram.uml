@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="0.0">com.example.adam.Dijkstra</node>
+    <node x="528.0" y="382.0">com.example.adam.Link</node>
+    <node x="257.0" y="382.0">com.example.adam.Network</node>
+    <node x="0.0" y="382.0">com.example.adam.Station</node>
+    <node x="52.5" y="260.0">com.example.adam.Dijkstra.NodePriorityQueue</node>
+    <node x="334.0" y="0.0">com.example.adam.BaseStation</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.example.adam.Dijkstra.NodePriorityQueue" target="com.example.adam.Dijkstra">
+      <point x="0.0" y="-38.5" />
+      <point x="0.0" y="105.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5679314565483476" x="117.0" y="399.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
